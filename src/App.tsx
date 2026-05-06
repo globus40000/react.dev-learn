@@ -1,15 +1,16 @@
 import type { FC } from "react";
 
-interface IGreetingProps {
-  name: string;
-}
-
-const Greeting: FC<IGreetingProps> = ({ name }) => {
-  return <h1>Hello, {name}</h1>;
+const MyButton: FC = () => {
+  return <button type="button">I'm a button</button>;
 };
 
 const App: FC = () => {
-  return <Greeting name="world" />;
+  return (
+    <div>
+      <h1>Welcome to my app</h1>
+      <MyButton />
+    </div>
+  );
 };
 
 export default App;

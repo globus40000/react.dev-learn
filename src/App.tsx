@@ -1,38 +1,36 @@
 import type { FC } from "react";
 
-interface User {
-  name: string;
-  imageUrl: string;
-  imageSize: number;
+interface Product {
+  title: string;
+  isFruit: boolean;
+  id: number;
 }
 
-const user: User = {
-  name: "Hedy Lamarr",
-  imageUrl: "https://react.dev/images/docs/scientists/yXOvdOSs.jpg",
-  imageSize: 90,
-};
+const products: Product[] = [
+  { title: "Cabbage", isFruit: false, id: 1 },
+  { title: "Garlic", isFruit: false, id: 2 },
+  { title: "Apple", isFruit: true, id: 3 },
+];
 
-const Profile: FC = () => {
-  return (
-    <div>
-      <h1>{user.name}</h1>
-      <img
-        className="avatar"
-        src={user.imageUrl}
-        alt={"Photo of " + user.name}
-        style={{
-          width: user.imageSize,
-          height: user.imageSize,
-        }}
-      />
-    </div>
-  );
+const ShoppingList: FC = () => {
+  const listItems = products.map((product) => (
+    <li
+      key={product.id}
+      style={{
+        color: product.isFruit ? "magenta" : "darkgreen",
+      }}
+    >
+      {product.title}
+    </li>
+  ));
+
+  return <ul>{listItems}</ul>;
 };
 
 const App: FC = () => {
   return (
     <div>
-      <Profile />
+      <ShoppingList />
     </div>
   );
 };

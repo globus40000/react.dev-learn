@@ -1,36 +1,25 @@
-import type { FC } from "react";
+import { useState, type FC } from "react";
 
-interface Product {
-  title: string;
-  isFruit: boolean;
-  id: number;
-}
+const MyButton: FC = () => {
+  const [count, setCount] = useState(0);
 
-const products: Product[] = [
-  { title: "Cabbage", isFruit: false, id: 1 },
-  { title: "Garlic", isFruit: false, id: 2 },
-  { title: "Apple", isFruit: true, id: 3 },
-];
+  const handleClick = () => {
+    setCount(count + 1);
+  };
 
-const ShoppingList: FC = () => {
-  const listItems = products.map((product) => (
-    <li
-      key={product.id}
-      style={{
-        color: product.isFruit ? "magenta" : "darkgreen",
-      }}
-    >
-      {product.title}
-    </li>
-  ));
-
-  return <ul>{listItems}</ul>;
+  return (
+    <button type="button" onClick={handleClick}>
+      Clicked {count} times
+    </button>
+  );
 };
 
 const App: FC = () => {
   return (
     <div>
-      <ShoppingList />
+      <h1>Counters that update separately</h1>
+      <MyButton />
+      <MyButton />
     </div>
   );
 };

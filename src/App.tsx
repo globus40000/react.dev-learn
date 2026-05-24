@@ -1,6 +1,19 @@
 import { useState, type FC } from "react";
 
-const MyButton: FC = () => {
+interface MyButtonProps {
+  count: number;
+  onClick: () => void;
+}
+
+const MyButton: FC<MyButtonProps> = ({ count, onClick }) => {
+  return (
+    <button type="button" onClick={onClick}>
+      Clicked {count} times
+    </button>
+  );
+};
+
+const App: FC = () => {
   const [count, setCount] = useState(0);
 
   const handleClick = () => {
@@ -8,18 +21,10 @@ const MyButton: FC = () => {
   };
 
   return (
-    <button type="button" onClick={handleClick}>
-      Clicked {count} times
-    </button>
-  );
-};
-
-const App: FC = () => {
-  return (
     <div>
       <h1>Counters that update separately</h1>
-      <MyButton />
-      <MyButton />
+      <MyButton count={count} onClick={handleClick} />
+      <MyButton count={count} onClick={handleClick} />
     </div>
   );
 };

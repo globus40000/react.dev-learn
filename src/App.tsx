@@ -1,11 +1,11 @@
 import type { JSX } from "react";
 
-type Product = {
+interface Product {
   category: string;
   price: string;
   stocked: boolean;
   name: string;
-};
+}
 
 function ProductCategoryRow({ category }: { category: string }) {
   return (

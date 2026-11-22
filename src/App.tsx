@@ -15,11 +15,7 @@ function ProductCategoryRow({ category }: { category: string }) {
   );
 }
 
-function ProductRow({
-  product,
-}: {
-  product: Product;
-}) {
+function ProductRow({ product }: { product: Product }) {
   const name = product.stocked ? (
     product.name
   ) : (
@@ -76,7 +72,11 @@ function SearchBar({
   onInStockOnlyChange: (inStockOnly: boolean) => void;
 }) {
   return (
-    <form>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+      }}
+    >
       <input
         type="text"
         placeholder="Search..."

@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import { useState, type JSX } from "react";
 
 interface Product {
   category: string;
@@ -64,22 +64,63 @@ function ProductTable({ products }: { products: Product[] }) {
   );
 }
 
-function SearchBar() {
+function SearchBar({
+  filterText,
+  onFilterTextChange,
+  inStockOnly,
+  onInStockOnlyChange,
+}: {
+  filterText: string;
+  onFilterTextChange: (filterText: string) => void;
+  inStockOnly: boolean;
+  onInStockOnlyChange: (inStockOnly: boolean) => void;
+}) {
   return (
     <form>
-      <input type="text" placeholder="Search..." />
+      <input
+        type="text"
+        placeholder="Search..."
+        value={filterText}
+        onChange={(event) => {
+          onFilterTextChange(event.target.value);
+        }}
+      />
       <label>
-        <input type="checkbox" /> Only show products in stock
+        <input
+          type="checkbox"
+          checked={inStockOnly}
+          onChange={(event) => {
+            onInStockOnlyChange(event.target.checked);
+          }}
+        />{" "}
+        Only show products in stock
       </label>
     </form>
   );
 }
 
 function FilterableProductTable({ products }: { products: Product[] }) {
+  const [filterText, setFilterText] = useState("");
+  const [inStockOnly, setInStockOnly] = useState(false);
+
+  const filteredProducts = products.filter((product) => {
+    const matchesFilterText = product.name
+      .toLowerCase()
+      .includes(filterText.toLowerCase());
+    const matchesStock = !inStockOnly || product.stocked;
+
+    return matchesFilterText && matchesStock;
+  });
+
   return (
     <div>
-      <SearchBar />
-      <ProductTable products={products} />
+      <SearchBar
+        filterText={filterText}
+        onFilterTextChange={setFilterText}
+        inStockOnly={inStockOnly}
+        onInStockOnlyChange={setInStockOnly}
+      />
+      <ProductTable products={filteredProducts} />
     </div>
   );
 }

@@ -1,16 +1,13 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
 
-const rootElement = document.getElementById("root");
+// Clear the existing HTML content
+document.body.innerHTML = '<div id="app"></div>';
 
-if (!rootElement) {
-  throw new Error("Root element not found");
+// Render your React component instead
+const app = document.getElementById("app");
+if (!app) {
+  throw new Error("App container was not found");
 }
 
-createRoot(rootElement).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+const root = createRoot(app);
+root.render(<h1>Hello, world</h1>);

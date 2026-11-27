@@ -1,13 +1,12 @@
 import { createRoot } from "react-dom/client";
+import { NavigationBar } from "./NavigationBar";
 
-// Clear the existing HTML content
-document.body.innerHTML = '<div id="app"></div>';
+const domNode = document.getElementById("navigation");
 
-// Render your React component instead
-const app = document.getElementById("app");
-if (!app) {
-  throw new Error("App container was not found");
+if (!domNode) {
+  throw new Error("Navigation container was not found");
 }
 
-const root = createRoot(app);
-root.render(<h1>Hello, world</h1>);
+const root = createRoot(domNode);
+
+root.render(<NavigationBar />);

@@ -1,12 +1,13 @@
 import { createRoot } from "react-dom/client";
-import { NavigationBar } from "./NavigationBar";
+import { CartBadge } from "./CartBadge";
+import { ReviewsSection } from "./ReviewsSection";
 
-const domNode = document.getElementById("navigation");
+const cartBadgeElement = document.getElementById("cart-badge");
+const reviewsSectionElement = document.getElementById("reviews-section");
 
-if (!domNode) {
-  throw new Error("Navigation container was not found");
+if (cartBadgeElement) {
+  createRoot(cartBadgeElement).render(<CartBadge />);
 }
-
-const root = createRoot(domNode);
-
-root.render(<NavigationBar />);
+if (reviewsSectionElement) {
+  createRoot(reviewsSectionElement).render(<ReviewsSection />);
+}

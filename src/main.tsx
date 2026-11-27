@@ -1,13 +1,13 @@
 import { createRoot } from "react-dom/client";
+import { CartBadge } from "./CartBadge";
+import { ReviewsSection } from "./ReviewsSection";
 
-// Clear the existing HTML content
-document.body.innerHTML = '<div id="app"></div>';
+const cartBadgeElement = document.getElementById("cart-badge");
+const reviewsSectionElement = document.getElementById("reviews-section");
 
-// Render your React component instead
-const app = document.getElementById("app");
-if (!app) {
-  throw new Error("App container was not found");
+if (cartBadgeElement) {
+  createRoot(cartBadgeElement).render(<CartBadge />);
 }
-
-const root = createRoot(app);
-root.render(<h1>Hello, world</h1>);
+if (reviewsSectionElement) {
+  createRoot(reviewsSectionElement).render(<ReviewsSection />);
+}
